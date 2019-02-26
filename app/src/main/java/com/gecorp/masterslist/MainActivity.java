@@ -10,7 +10,8 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.gecorp.masterslist.Apps.appsFragment;
+import com.gecorp.masterslist.Masters.mastersFragment;
+import com.gecorp.masterslist.User.Login.loginFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,21 +23,25 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fgmnt = null;
+            ConstraintLayout container = (ConstraintLayout) findViewById(R.id.container);
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
-                    LinearLayout loginLayout = (LinearLayout) findViewById(R.id.loginLayout);
-                    ConstraintLayout container = (ConstraintLayout) findViewById(R.id.container);
-                    fgmnt = new appsFragment();
+                    fgmnt = new loginFragment();
+                    this.loadFragment(fgmnt);
                     mTextMessage.setText(R.string.title_dashboard);
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
                     return true;
+                case R.id.userStack:
+                    fgmnt = new mastersFragment();
+                    this.loadFragment(fgmnt);
+                    mTextMessage.setText(R.string.title_userStack);
+                    return true;
             }
-            this.loadFragment(fgmnt);
             return false;
         }
         private boolean loadFragment(Fragment fragment){
